@@ -88,12 +88,12 @@ final class Uri implements UriInterface
         }
     }
 
-    public function getScheme()
+    public function getScheme(): string
     {
         return $this->scheme;
     }
 
-    public function getAuthority()
+    public function getAuthority(): string
     {
         if ($this->host === '') {
             return '';
@@ -102,37 +102,37 @@ final class Uri implements UriInterface
         return ($this->userInfo !== '' ? $this->userInfo . '@' : '') . $this->host . ($this->port !== null ? ':' . $this->port : '');
     }
 
-    public function getUserInfo()
+    public function getUserInfo(): string
     {
         return $this->userInfo;
     }
 
-    public function getHost()
+    public function getHost(): string
     {
         return $this->host;
     }
 
-    public function getPort()
+    public function getPort(): ?int
     {
         return $this->port;
     }
 
-    public function getPath()
+    public function getPath(): string
     {
         return $this->path;
     }
 
-    public function getQuery()
+    public function getQuery(): string
     {
         return $this->query;
     }
 
-    public function getFragment()
+    public function getFragment(): string
     {
         return $this->fragment;
     }
 
-    public function withScheme($scheme)
+    public function withScheme(string $scheme): UriInterface
     {
         $scheme = \strtolower($scheme);
         if ($scheme === $this->scheme) {
@@ -153,7 +153,7 @@ final class Uri implements UriInterface
         return $new;
     }
 
-    public function withUserInfo($user, $password = null)
+    public function withUserInfo(string $user, ?string $password = null): UriInterface
     {
         $userInfo = $this->encode($user, \PHP_URL_USER) . ($password !== null ? ':' . $this->encode($password, \PHP_URL_PASS) : '');
         if ($userInfo === $this->userInfo) {
@@ -166,7 +166,7 @@ final class Uri implements UriInterface
         return $new;
     }
 
-    public function withHost($host)
+    public function withHost(string $host): UriInterface
     {
         $host = \strtolower($host);
         if ($host === $this->host) {
@@ -183,7 +183,7 @@ final class Uri implements UriInterface
         return $new;
     }
 
-    public function withPort($port)
+    public function withPort(?int $port): UriInterface
     {
         $port = $port === null ? null : (int) $port;
         if (($port === 80 && $this->scheme === 'http') || ($port === 443 && $this->scheme === 'https')) {
@@ -204,7 +204,7 @@ final class Uri implements UriInterface
         return $new;
     }
 
-    public function withPath($path)
+    public function withPath(string $path): UriInterface
     {
         $path = $this->encode($path, \PHP_URL_PATH);
         if ($path === $this->path) {
@@ -217,7 +217,7 @@ final class Uri implements UriInterface
         return $new;
     }
 
-    public function withQuery($query)
+    public function withQuery(string $query): UriInterface
     {
         $query = $this->encode($query, \PHP_URL_QUERY);
         if ($query === $this->query) {
@@ -230,7 +230,7 @@ final class Uri implements UriInterface
         return $new;
     }
 
-    public function withFragment($fragment)
+    public function withFragment(string $fragment): UriInterface
     {
         $fragment = $this->encode($fragment, \PHP_URL_FRAGMENT);
         if ($fragment === $this->fragment) {
@@ -243,7 +243,7 @@ final class Uri implements UriInterface
         return $new;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         $uri = '';
         if ($this->scheme !== '') {

@@ -49,7 +49,7 @@ final class ServerRequest extends AbstractRequest implements ServerRequestInterf
      * @throws \InvalidArgumentException for an invalid URL or body
      */
     public function __construct(
-        $method,
+        string $method,
         $url,
         array $headers = array(),
         $body = '',
@@ -87,41 +87,41 @@ final class ServerRequest extends AbstractRequest implements ServerRequestInterf
         }
     }
 
-    public function getServerParams()
+    public function getServerParams(): array
     {
         return $this->serverParams;
     }
 
-    public function getCookieParams()
+    public function getCookieParams(): array
     {
         return $this->cookies;
     }
 
-    public function withCookieParams(array $cookies)
+    public function withCookieParams(array $cookies): ServerRequestInterface
     {
         $new = clone $this;
         $new->cookies = $cookies;
         return $new;
     }
 
-    public function getQueryParams()
+    public function getQueryParams(): array
     {
         return $this->queryParams;
     }
 
-    public function withQueryParams(array $query)
+    public function withQueryParams(array $query): ServerRequestInterface
     {
         $new = clone $this;
         $new->queryParams = $query;
         return $new;
     }
 
-    public function getUploadedFiles()
+    public function getUploadedFiles(): array
     {
         return $this->fileParams;
     }
 
-    public function withUploadedFiles(array $uploadedFiles)
+    public function withUploadedFiles(array $uploadedFiles): ServerRequestInterface
     {
         $new = clone $this;
         $new->fileParams = $uploadedFiles;
@@ -133,19 +133,19 @@ final class ServerRequest extends AbstractRequest implements ServerRequestInterf
         return $this->parsedBody;
     }
 
-    public function withParsedBody($data)
+    public function withParsedBody($data): ServerRequestInterface
     {
         $new = clone $this;
         $new->parsedBody = $data;
         return $new;
     }
 
-    public function getAttributes()
+    public function getAttributes(): array
     {
         return $this->attributes;
     }
 
-    public function getAttribute($name, $default = null)
+    public function getAttribute(string $name, $default = null)
     {
         if (!\array_key_exists($name, $this->attributes)) {
             return $default;
@@ -153,14 +153,14 @@ final class ServerRequest extends AbstractRequest implements ServerRequestInterf
         return $this->attributes[$name];
     }
 
-    public function withAttribute($name, $value)
+    public function withAttribute(string $name, $value): ServerRequestInterface
     {
         $new = clone $this;
         $new->attributes[$name] = $value;
         return $new;
     }
 
-    public function withoutAttribute($name)
+    public function withoutAttribute(string $name): ServerRequestInterface
     {
         $new = clone $this;
         unset($new->attributes[$name]);

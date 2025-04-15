@@ -321,12 +321,12 @@ final class Response extends AbstractMessage implements ResponseInterface, Statu
         $this->reasonPhrase = ($reason !== '' && $reason !== null) ? (string) $reason : self::getReasonPhraseForStatusCode($status);
     }
 
-    public function getStatusCode()
+    public function getStatusCode(): int
     {
         return $this->statusCode;
     }
 
-    public function withStatus($code, $reasonPhrase = '')
+    public function withStatus(int $code, string $reasonPhrase = ''): ResponseInterface
     {
         if ((string) $reasonPhrase === '') {
             $reasonPhrase = self::getReasonPhraseForStatusCode($code);
@@ -343,7 +343,7 @@ final class Response extends AbstractMessage implements ResponseInterface, Statu
         return $response;
     }
 
-    public function getReasonPhrase()
+    public function getReasonPhrase(): string
     {
         return $this->reasonPhrase;
     }
