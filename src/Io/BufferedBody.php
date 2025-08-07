@@ -172,7 +172,7 @@ class BufferedBody implements StreamInterface
         return \substr($this->buffer, $pos);
     }
 
-    public function getMetadata(string $key = null): ?array
+    public function getMetadata(?string $key = null): ?array
     {
         return $key === null ? array() : null;
     }
